@@ -64,22 +64,22 @@ BUILD_PREREQUIRES="
 	cmd:gcc$secondaryArchSuffix
 	cmd:make
 	cmd:pkg_config$secondaryArchSuffix
-	cmd:python
+#	cmd:python
 	cmd:swig
 	"
 
 defineDebugInfoPackage partio$secondaryArchSuffix \
-	$commandBinDir/partattr$commandSuffix \
-	$commandBinDir/partconv$commandSuffix \
-	$commandBinDir/partinfo$commandSuffix \
-	$commandBinDir/partview$commandSuffix
+	$commandBinDir/partattr \
+	$commandBinDir/partconv \
+	$commandBinDir/partinfo \
+	$commandBinDir/partview
 
 BUILD()
 {
 	mkdir -p build
 	cd build
 	cmake .. \
-		-DCMAKE_INSTALL_PREFIX=$prefix \
+		$cmakeDirArgs \
 		-Wno-dev
 
 	make $jobArgs
